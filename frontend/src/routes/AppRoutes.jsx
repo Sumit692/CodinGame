@@ -7,7 +7,7 @@ import Arena from "../pages/Arena/Arena";
 import Leaderboard from "../pages/Leaderboard/Leaderboard";
 import Profile from "../pages/Profile/Profile";
 import Problem from "../pages/Problem/Problem";
-
+import Battle from "../pages/Arena/Battle";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -19,6 +19,7 @@ function AppRoutes() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/problem" element={<Problem />} />
+        <Route path="/battle" element={<Battle />} />
       </Routes>
     </BrowserRouter>
   );
