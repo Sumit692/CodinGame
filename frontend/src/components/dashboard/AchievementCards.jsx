@@ -1,48 +1,68 @@
-const achievements = [
-  {
-    title: "First Blood",
-    description: "Solve your first coding problem",
-    icon: "⚔️",
-  },
-  {
-    title: "Bug Hunter",
-    description: "Fix 50 coding errors",
-    icon: "🐞",
-  },
-  {
-    title: "Speed Runner",
-    description: "Solve a problem in under 2 minutes",
-    icon: "⚡",
-  },
-];
+import { useEffect } from "react";
+import {
+  getAchievements,
+  getSeenAchievements,
+  markAchievementSeen,
+} from "../../utils/xpManager";
+import { useNotification } from "../../context/NotificationContext";
 
 function AchievementCards() {
+  const achievements = getAchievements();
+
+  const { showNotification } =
+    useNotification();
+
+  useEffect(() => {
+    const seenAchievements =
+      getSeenAchievements();
+
+    achievements.forEach((achievement) => {
+      if (
+        !seenAchievements.includes(
+          achievement.title
+        )
+      ) {
+        showNotification(
+          `🏆 ${achievement.title} Unlocked`
+        );
+
+        markAchievementSeen(
+          achievement.title
+        );
+      }
+    });
+  }, []);
+
   return (
     <div>
       <h2 className="text-3xl font-bold text-white mb-6">
-        Achievements
+        🏅 Achievements
       </h2>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {achievements.map((achievement) => (
-          <div
-            key={achievement.title}
-            className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-purple-500 transition"
-          >
-            <div className="text-4xl mb-4">
-              {achievement.icon}
+      {achievements.length === 0 ? (
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+          <p className="text-zinc-400">
+            No achievements unlocked yet.
+          </p>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {achievements.map((achievement) => (
+            <div
+              key={achievement.title}
+              className="bg-zinc-900 border border-yellow-500 rounded-2xl p-6"
+            >
+              <div className="text-5xl mb-3">
+                {achievement.icon}
+              </div>
+
+              <h3 className="text-xl font-bold text-white">
+                {achievement.title}
+              </h3>
             </div>
-
-            <h3 className="text-xl font-semibold text-white">
-              {achievement.title}
-            </h3>
-
-            <p className="text-zinc-400 mt-2">
-              {achievement.description}
-            </p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

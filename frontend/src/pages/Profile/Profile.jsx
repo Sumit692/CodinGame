@@ -1,10 +1,22 @@
+import DashboardLayout from "../../components/layout/DashboardLayout";
+import MatchHistory from "../../components/profile/MatchHistory";
+import ProfileSettings from "../../components/profile/ProfileSettings";
+
 function Profile() {
   return (
-    <div className="min-h-screen bg-black text-white p-10">
-      <h1 className="text-5xl font-bold">
-        👤 Profile
-      </h1>
-    </div>
+    <DashboardLayout>
+      <div className="max-w-5xl mx-auto px-6 py-12">
+        <h1 className="text-5xl font-bold text-white mb-10">
+          👤 Profile
+        </h1>
+
+        <MatchHistory />
+
+        <div className="mt-10">
+          <ProfileSettings />
+        </div>
+      </div>
+    </DashboardLayout>
   );
 }
 

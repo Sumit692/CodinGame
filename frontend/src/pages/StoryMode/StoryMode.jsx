@@ -1,4 +1,5 @@
 import DashboardLayout from "../../components/layout/DashboardLayout";
+import { useNavigate } from "react-router-dom";
 
 const worlds = [
   {
@@ -36,6 +37,8 @@ const worlds = [
 ];
 
 function StoryMode() {
+  const navigate = useNavigate();
+
   return (
     <DashboardLayout>
       <div className="max-w-6xl mx-auto px-6 py-12">
@@ -75,7 +78,10 @@ function StoryMode() {
 
               <div className="mt-6">
                 {world.unlocked ? (
-                  <button className="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold px-5 py-2 rounded-xl">
+                  <button
+                    onClick={() => navigate("/world-map")}
+                    className="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold px-5 py-2 rounded-xl"
+                  >
                     Enter World
                   </button>
                 ) : (

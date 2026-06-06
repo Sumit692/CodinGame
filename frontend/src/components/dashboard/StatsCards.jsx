@@ -1,24 +1,31 @@
+import {
+  getXP,
+  getLevel,
+  getWins,
+  getRank,
+} from "../../utils/xpManager";
+
 function StatsCards() {
   const stats = [
     {
-      title: "Problems Solved",
-      value: "128",
-      icon: "💻",
+      title: "XP",
+      value: getXP(),
+      icon: "⭐",
     },
     {
-      title: "Current Rank",
-      value: "Elite",
-      icon: "🏆",
+      title: "Level",
+      value: getLevel(),
+      icon: "🎖️",
     },
     {
       title: "Battle Wins",
-      value: "37",
-      icon: "⚔️",
+      value: getWins(),
+      icon: "🏆",
     },
     {
-      title: "Global XP",
-      value: "12,450",
-      icon: "⭐",
+      title: "Rank",
+      value: getRank(),
+      icon: "👑",
     },
   ];
 
@@ -27,13 +34,13 @@ function StatsCards() {
       {stats.map((stat) => (
         <div
           key={stat.title}
-          className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-cyan-500 transition"
+          className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6"
         >
           <div className="text-4xl mb-3">
             {stat.icon}
           </div>
 
-          <p className="text-zinc-400 text-sm">
+          <p className="text-zinc-400">
             {stat.title}
           </p>
 
